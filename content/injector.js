@@ -313,7 +313,8 @@ if (!window.__MOYU_INJECTED__) {
       '<label>饱和<input type="range" id="__moyu_sat" min="0" max="100"></label>' +
       '<label>亮度<input type="range" id="__moyu_bri" min="70" max="100"></label>' +
       '<button id="__moyu_gray">全灰</button>' +
-      '<span class="hint">⌃M 隐藏 · ⌃. 切回大窗</span>';
+      '<button id="__moyu_back">⤢ 还原大窗</button>' +
+      '<span class="hint">⌃M 隐藏/恢复</span>';
     document.body.appendChild(ctrl);
     const sat = ctrl.querySelector('#__moyu_sat');
     const bri = ctrl.querySelector('#__moyu_bri');
@@ -331,6 +332,10 @@ if (!window.__MOYU_INJECTED__) {
       S.filter = { preset: 'gray' };
       window.__moyuFilter.apply(S.video, S.filter);
       save();
+    });
+    // 小窗（popup 窗口）没有工具栏打不开插件面板，这个按钮是切回大窗的唯一入口
+    ctrl.querySelector('#__moyu_back').addEventListener('click', () => {
+      try { chrome.runtime.sendMessage({ action: 'toggleWindow' }); } catch (e) {}
     });
     const onMove = (e) => ctrl.classList.toggle('show', e.clientY > window.innerHeight - 80);
     window.addEventListener('mousemove', onMove);

@@ -49,18 +49,21 @@ async function toggleWindow(tab) {
 }
 
 chrome.commands.onCommand.addListener(async (command) => {
+  if (command !== 'boss-key') return;
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (!tab || !tab.id) return;
-  if (command === 'boss-key') return bossKey(tab);
-  if (command === 'toggle-window') return toggleWindow(tab);
+  if (tab && tab.id) bossKey(tab);
 });
 
-// popup 面板点「小窗看球」也走同一套逻辑
+// 小窗切换：popup 面板按钮 + 小窗内悬浮条的「还原大窗」按钮都走这里
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg && msg.action === 'toggleWindow') {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }).then(([tab]) => {
-      if (tab && tab.id) toggleWindow(tab);
-    });
+    if (sender.tab && sender.tab.id) {
+      toggleWindow(sender.tab); // 来自页内悬浮条：直接用发消息的 tab
+    } else {
+      chrome.tabs.query({ active: true, lastFocusedWindow: true }).then(([tab]) => {
+        if (tab && tab.id) toggleWindow(tab);
+      });
+    }
     sendResponse({ ok: true });
   }
   return false;

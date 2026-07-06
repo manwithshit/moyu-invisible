@@ -92,8 +92,6 @@ document.querySelectorAll('.skin').forEach((btn) => {
   btn.addEventListener('click', () => run({ action: 'applySkin', skin: btn.dataset.skin }));
 });
 
-$('#fullscreen').addEventListener('click', () => run({ action: 'fullscreen' }));
-
 $('#restore').addEventListener('click', async () => {
   const res = await send({ action: 'restore' });
   if (res && res.ok) { setStatus(null); hint(''); }
@@ -129,11 +127,6 @@ document.querySelectorAll('.presets button').forEach((btn) => {
 $('#popwin').addEventListener('click', () => {
   chrome.runtime.sendMessage({ action: 'toggleWindow' });
   window.close();
-});
-
-$('#shortcuts').addEventListener('click', (e) => {
-  e.preventDefault();
-  chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
 });
 
 // ---------- 初始化 ----------

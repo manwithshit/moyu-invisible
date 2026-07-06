@@ -6,57 +6,48 @@
 </head>
 <body>
   <header>
-    <h1>摸鱼看球</h1>
+    <h1>⚽ 摸鱼看球</h1>
     <span id="status" class="status">未启用</span>
   </header>
 
-  <section>
-    <h2>模式一 · 换皮模式</h2>
+  <section class="card">
+    <h2>换皮模式</h2>
     <div class="skins">
       <button class="skin" data-skin="course">
-        <span class="ico" style="background:#1e6fff">学</span>
+        <span class="ico" style="background:#e8f1ff;color:#1e6fff">学</span>
         <span class="nm">在线课程</span>
-        <span class="ds">企业学习中心</span>
       </button>
       <button class="skin" data-skin="meeting">
-        <span class="ico" style="background:#3370ff">会</span>
+        <span class="ico" style="background:#e7f0ff;color:#3370ff">会</span>
         <span class="nm">视频会议</span>
-        <span class="ds">飞书风 · 小窗</span>
       </button>
       <button class="skin" data-skin="editor">
-        <span class="ico" style="background:#101012;color:#00c8c8">剪</span>
+        <span class="ico" style="background:#e6f7f7;color:#0aa8a8">剪</span>
         <span class="nm">视频剪辑</span>
-        <span class="ds">剪映风 · 深色</span>
       </button>
     </div>
-  </section>
-
-  <section>
-    <h2>模式二 · 小窗看球</h2>
-    <button id="popwin" class="wide">小窗看球（角落小窗 + 铺满 + 滤镜，一键）</button>
-    <button id="fullscreen" class="wide" style="margin-top:8px">仅全屏滤镜（本标签页，不动窗口）</button>
-    <p class="boss" style="margin-top:6px"><span style="font-size:11px;color:#8a919f">小窗内鼠标移到底部可调滤镜；按 ⌃Ctrl + . 切回大窗并还原</span></p>
-  </section>
-
-  <section>
-    <h2>滤镜</h2>
-    <label>饱和度 <span id="satVal">0.30</span>
-      <input type="range" id="sat" min="0" max="100" value="30" />
-    </label>
-    <label>亮度 <span id="briVal">0.90</span>
-      <input type="range" id="bri" min="70" max="100" value="90" />
-    </label>
-    <div class="presets">
-      <button data-preset="gray">全灰</button>
-      <button data-preset="low">低饱和</button>
-      <button data-preset="off">关闭滤镜</button>
+    <div class="filters">
+      <label>饱和度 <span id="satVal">0.30</span>
+        <input type="range" id="sat" min="0" max="100" value="30" />
+      </label>
+      <label>亮度 <span id="briVal">0.90</span>
+        <input type="range" id="bri" min="70" max="100" value="90" />
+      </label>
+      <div class="presets">
+        <button data-preset="gray">全灰</button>
+        <button data-preset="low">低饱和</button>
+        <button data-preset="off">关闭滤镜</button>
+      </div>
     </div>
   </section>
 
-  <section class="boss">
-    <h2>老板键</h2>
-    <p>老板键 <kbd>⌃Ctrl + M</kbd>：一键隐藏视频并静音，再按恢复。<br/>小窗切换 <kbd>⌃Ctrl + .</kbd>：角落小窗 / 普通窗口互切。<br/>Mac 均为 Control（⌃）而非 ⌘。<a href="#" id="shortcuts">修改快捷键</a></p>
+  <section class="card">
+    <h2>小窗看球</h2>
+    <button id="popwin" class="wide primary">一键缩到角落小窗</button>
+    <p class="tip">小窗内鼠标移到底部：调滤镜 / 还原大窗</p>
   </section>
+
+  <p class="boss">老板键 <kbd>⌃Ctrl + M</kbd>：隐藏并静音，再按恢复（小窗同样有效）</p>
 
   <button id="restore" class="wide danger">一键还原页面</button>
   <p class="hint" id="hint"></p>

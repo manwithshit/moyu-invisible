@@ -18,13 +18,6 @@
         "mac": "MacCtrl+M"
       },
       "description": "老板键：一键隐藏视频并静音"
-    },
-    "toggle-window": {
-      "suggested_key": {
-        "default": "Ctrl+Period",
-        "mac": "MacCtrl+Period"
-      },
-      "description": "小窗模式：当前标签页在角落小窗 / 普通窗口间切换"
     }
   }
 }
