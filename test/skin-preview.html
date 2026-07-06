@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>皮肤预览（开发用）</title>
+<script src="../content/skins/skin-course.js"></script>
+<script src="../content/skins/skin-meeting.js"></script>
+<script src="../content/skins/skin-editor.js"></script>
+<style>
+  body { margin: 0; }
+  #switch { position: fixed; right: 12px; bottom: 12px; z-index: 2147483610; display: flex; gap: 6px; }
+  #switch button { padding: 6px 12px; }
+</style>
+</head>
+<body>
+<video autoplay muted playsinline style="width:600px"></video>
+<div id="switch">
+  <button data-s="course">课程</button>
+  <button data-s="meeting">会议</button>
+  <button data-s="editor">剪辑</button>
+</div>
+<script>
+// 独立于 chrome API 的皮肤预览：canvas 假球赛流 + 简化版 injector 挂载逻辑
+const Z_OVERLAY = 2147483600, Z_VIDEO = 2147483601;
+const BASE_CSS =
+  'html,body{overflow:hidden !important;}' +
+  '#__moyu_overlay{position:fixed;inset:0;z-index:' + Z_OVERLAY + ';' +
+  'font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;' +
+  'font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}' +
+  ':where(#__moyu_overlay,#__moyu_overlay *){box-sizing:border-box;margin:0;padding:0;cursor:default;user-select:none;}' +
+  '#__moyu_overlay ul{list-style:none;}';
+
+const canvas = document.createElement('canvas');
+canvas.width = 1280; canvas.height = 720;
+const ctx = canvas.getContext('2d');
+let t = 0;
+(function draw() {
+  t += 0.016;
+  for (let i = 0; i < 8; i++) { ctx.fillStyle = i % 2 ? '#2e7d32' : '#388e3c'; ctx.fillRect(i * 160, 0, 160, 720); }
+  ctx.strokeStyle = 'rgba(255,255,255,.8)'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(640, 0); ctx.lineTo(640, 720); ctx.stroke();
+  ctx.beginPath(); ctx.arc(640, 360, 90, 0, Math.PI * 2); ctx.stroke();
+  const x = 640 + Math.sin(t * 0.9) * 420, y = 360 + Math.cos(t * 1.7) * 200;
+  ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x, y, 16, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = 'rgba(0,0,0,.7)'; ctx.fillRect(40, 30, 260, 54);
+  ctx.fillStyle = '#fff'; ctx.font = 'bold 28px sans-serif';
+  ctx.fillText("ARG 2 : 1 FRA  78'", 56, 66);
+  requestAnimationFrame(draw);
+})();
+const video = document.querySelector('video');
+video.srcObject = canvas.captureStream(30);
+
+let styleEl = null, overlay = null, cleanup = null, cur = null;
+function mount(id) {
+  const skin = window.__MOYU_SKINS__[id];
+  if (cleanup) { try { cleanup(); } catch (e) {} cleanup = null; }
+  overlay && overlay.remove(); styleEl && styleEl.remove();
+  styleEl = document.createElement('style');
+  styleEl.textContent = BASE_CSS + skin.css;
+  document.head.appendChild(styleEl);
+  overlay = document.createElement('div');
+  overlay.id = '__moyu_overlay';
+  overlay.innerHTML = skin.html;
+  document.body.appendChild(overlay);
+  position(skin);
+  const df = skin.defaultFilter;
+  video.style.setProperty('filter', 'saturate(' + df.saturate + ') brightness(' + df.brightness + ')', 'important');
+  if (skin.onMount) cleanup = skin.onMount(overlay);
+  cur = id;
+}
+function position(skin) {
+  const slot = overlay.querySelector(skin.videoSlot);
+  if (!slot) return;
+  const r = slot.getBoundingClientRect();
+  const st = video.style;
+  st.setProperty('position', 'fixed', 'important');
+  st.setProperty('left', r.left + 'px', 'important');
+  st.setProperty('top', r.top + 'px', 'important');
+  st.setProperty('width', r.width + 'px', 'important');
+  st.setProperty('height', r.height + 'px', 'important');
+  st.setProperty('z-index', Z_VIDEO, 'important');
+  st.setProperty('object-fit', 'cover', 'important');
+  st.setProperty('background', '#000', 'important');
+}
+window.addEventListener('resize', () => cur && position(window.__MOYU_SKINS__[cur]));
+document.querySelectorAll('#switch button').forEach((b) =>
+  b.addEventListener('click', () => mount(b.dataset.s))
+);
+const want = new URLSearchParams(location.search).get('skin') || 'course';
+mount(want);
+setTimeout(() => cur && position(window.__MOYU_SKINS__[cur]), 150);
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>某某体育 - 世界杯直播中</title>
+<style>
+  body { margin: 0; background: #0e1621; color: #dfe6ee; font-family: sans-serif; }
+  header { padding: 14px 20px; background: #16202e; font-size: 18px; font-weight: 700; }
+  .wrap { display: flex; gap: 16px; padding: 16px 20px; }
+  video { width: 70vw; background: #000; display: block; }
+  aside { flex: 1; background: #16202e; border-radius: 8px; padding: 14px; font-size: 13px; line-height: 2; }
+</style>
+</head>
+<body>
+<header>⚽ 某某体育 · 2026 世界杯 小组赛直播</header>
+<div class="wrap">
+  <video autoplay muted playsinline></video>
+  <aside>
+    <b>聊天室</b><br/>
+    球迷A：这球太可惜了！<br/>
+    球迷B：门将神了<br/>
+    球迷C：66666<br/>
+    球迷D：换人换人！
+  </aside>
+</div>
+<script>
+// canvas 生成一路"球场+滚动足球"的假直播流，用于本地测试插件的视频识别与换皮
+const canvas = document.createElement('canvas');
+canvas.width = 1280; canvas.height = 720;
+const ctx = canvas.getContext('2d');
+let t = 0;
+function draw() {
+  t += 0.016;
+  // 草坪条纹
+  for (let i = 0; i < 8; i++) {
+    ctx.fillStyle = i % 2 ? '#2e7d32' : '#388e3c';
+    ctx.fillRect(i * 160, 0, 160, 720);
+  }
+  // 中线与中圈
+  ctx.strokeStyle = 'rgba(255,255,255,.8)'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(640, 0); ctx.lineTo(640, 720); ctx.stroke();
+  ctx.beginPath(); ctx.arc(640, 360, 90, 0, Math.PI * 2); ctx.stroke();
+  // 滚动的"足球"
+  const x = 640 + Math.sin(t * 0.9) * 420;
+  const y = 360 + Math.cos(t * 1.7) * 200;
+  ctx.fillStyle = '#fff';
+  ctx.beginPath(); ctx.arc(x, y, 16, 0, Math.PI * 2); ctx.fill();
+  // 两个"球员"
+  ctx.fillStyle = '#e53935'; ctx.fillRect(x - 60 + Math.sin(t) * 20, y - 60, 18, 40);
+  ctx.fillStyle = '#1e88e5'; ctx.fillRect(x + 50, y - 30 + Math.cos(t) * 20, 18, 40);
+  // 比分牌
+  ctx.fillStyle = 'rgba(0,0,0,.7)'; ctx.fillRect(40, 30, 260, 54);
+  ctx.fillStyle = '#fff'; ctx.font = 'bold 28px sans-serif';
+  ctx.fillText('ARG 2 : 1 FRA  78\'', 56, 66);
+  requestAnimationFrame(draw);
+}
+draw();
+document.querySelector('video').srcObject = canvas.captureStream(30);
+// 模拟直播站脚本周期性改写 title（验证 MutationObserver 守护）
+setInterval(() => { document.title = '某某体育 - 世界杯直播中 ' + new Date().getSeconds(); }, 5000);
+</script>
+</body>
+</html>

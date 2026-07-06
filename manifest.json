@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "摸鱼看球 MoyuCup",
+  "version": "0.1.0",
+  "description": "直播页伪装工具：纯 CSS/DOM 层换皮，不代理、不嵌入、不缓存任何流媒体",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "摸鱼看球"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "boss-key": {
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "MacCtrl+M"
+      },
+      "description": "老板键：一键隐藏视频并静音"
+    },
+    "toggle-window": {
+      "suggested_key": {
+        "default": "Ctrl+Period",
+        "mac": "MacCtrl+Period"
+      },
+      "description": "小窗模式：当前标签页在角落小窗 / 普通窗口间切换"
+    }
+  }
+}
