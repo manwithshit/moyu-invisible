@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- 摸鱼看球 logo：青绿卡通鱼顶着足球，扁平风 -->
+  <!-- 足球 -->
+  <g transform="translate(88,30)">
+    <circle r="17" fill="#ffffff" stroke="#2b3240" stroke-width="3"/>
+    <polygon points="0,-7 6.7,-2.2 4.1,5.7 -4.1,5.7 -6.7,-2.2" fill="#2b3240"/>
+    <path d="M0,-17 L0,-7 M6.7,-2.2 L16.2,-5.2 M4.1,5.7 L10,13.6 M-4.1,5.7 L-10,13.6 M-6.7,-2.2 L-16.2,-5.2" stroke="#2b3240" stroke-width="2.6" fill="none"/>
+  </g>
+  <!-- 鱼尾 -->
+  <path d="M30 78 L8 60 C4 57 4 63 6 68 L12 80 L6 92 C4 97 4 103 8 100 L30 84 Z" fill="#ff8a3d"/>
+  <!-- 鱼身 -->
+  <ellipse cx="66" cy="80" rx="44" ry="32" fill="#18b2a6"/>
+  <!-- 鱼肚 -->
+  <path d="M38 96 C52 110 84 110 100 92 C88 106 54 108 38 96 Z" fill="#bff0ea"/>
+  <path d="M66 111.5 C84 111.5 100 100 106 88 C104 102 88 112 66 112 C50 112 36 104 30 94 C38 104 52 111.5 66 111.5 Z" fill="#0e8f85"/>
+  <!-- 背鳍（顶球那片，橙色） -->
+  <path d="M74 52 C76 40 86 36 92 38 C86 42 84 48 85 54 Z" fill="#ff8a3d"/>
+  <!-- 腹鳍 -->
+  <path d="M60 108 C58 116 50 120 44 118 C48 114 50 110 51 105 Z" fill="#ff8a3d"/>
+  <!-- 眼睛 -->
+  <circle cx="90" cy="72" r="9.5" fill="#ffffff"/>
+  <circle cx="92.5" cy="72" r="5" fill="#2b3240"/>
+  <circle cx="94.2" cy="70" r="1.8" fill="#ffffff"/>
+  <!-- 嘴 -->
+  <path d="M103 86 C106 88 106 92 103 94" stroke="#0e8f85" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- 腮线 -->
+  <path d="M76 62 C72 70 72 90 76 98" stroke="#0e8f85" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- 气泡 -->
+  <circle cx="34" cy="42" r="4" fill="#8adcd4"/>
+  <circle cx="44" cy="30" r="2.5" fill="#8adcd4"/>
+</svg>
