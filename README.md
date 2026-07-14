@@ -1,4 +1,4 @@
-# ⚽ 摸鱼看球 MoyuCup
+# 🫥 摸鱼隐身衣 Moyu Invisible
 
 [English](README.en.md) | 中文
 
@@ -59,7 +59,7 @@ python3 -m http.server 8791
 ## 目录结构
 
 ```
-moyucup/
+moyu-invisible/
 ├── manifest.json          # MV3，权限仅 activeTab / scripting / storage + commands
 ├── background.js          # 老板键 + tab 级静音 + 小窗切换
 ├── popup/                 # 插件面板

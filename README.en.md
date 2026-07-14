@@ -1,4 +1,4 @@
-# ⚽ MoyuCup — Watch the Game, Look Busy
+# 🫥 Moyu Invisible — Watch Anything, Look Busy
 
 English | [中文](README.md)
 
@@ -59,7 +59,7 @@ python3 -m http.server 8791
 ## Layout
 
 ```
-moyucup/
+moyu-invisible/
 ├── manifest.json          # MV3; permissions: activeTab / scripting / storage + commands
 ├── background.js          # boss key + tab mute + mini-window toggle
 ├── popup/                 # extension panel

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "摸鱼看球 MoyuCup",
+  "name": "摸鱼隐身衣 Moyu Invisible",
   "version": "0.1.0",
-  "description": "直播页伪装工具：纯 CSS/DOM 层换皮，不代理、不嵌入、不缓存任何流媒体",
+  "description": "视频页伪装工具：纯 CSS/DOM 层换皮，不代理、不嵌入、不缓存任何流媒体",
   "permissions": ["activeTab", "scripting", "storage"],
   "icons": {
     "16": "assets/icons/icon16.png",
@@ -12,7 +12,7 @@
   },
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "摸鱼看球",
+    "default_title": "摸鱼隐身衣",
     "default_icon": {
       "16": "assets/icons/icon16.png",
       "32": "assets/icons/icon32.png",
