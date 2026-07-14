@@ -11,7 +11,7 @@ if (!window.__MOYU_INJECTED__) {
 
   const Z_OVERLAY = 2147483600;
   const Z_VIDEO = 2147483601;
-  const log = (...a) => console.log('[MoyuCup]', ...a);
+  const log = (...a) => console.log('[Moyu Invisible]', ...a);
 
   const S = {
     mode: null, // 'skin' | 'fullscreen' | null
