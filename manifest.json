@@ -4,6 +4,20 @@
   "version": "0.1.0",
   "description": "视频页伪装工具：纯 CSS/DOM 层换皮，不代理、不嵌入、不缓存任何流媒体",
   "permissions": ["activeTab", "scripting", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "content/skins/skin-course.js",
+        "content/skins/skin-meeting.js",
+        "content/skins/skin-editor.js",
+        "content/disguise.js",
+        "content/filter.js",
+        "content/injector.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
   "icons": {
     "16": "assets/icons/icon16.png",
     "32": "assets/icons/icon32.png",
